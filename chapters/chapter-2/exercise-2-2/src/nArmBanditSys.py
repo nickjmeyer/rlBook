@@ -28,7 +28,7 @@ def EponentialHandles(scale = 1.0,n = None):
     else:
         handles = [None]*n
         for i in range(n):
-            handles[i] = Handle(numpy.random.normal, scale = scale)
+            handles[i] = Handle(numpy.random.exponential, scale = scale)
     return handles
         
 class Sys:
@@ -46,4 +46,19 @@ class Sys:
             ### or a Handle object itself
             
 a = NormalHandles(loc = 5.0, scale = 2.0, n = 10)
+b = EponentialHandles(scale = 3, n = 10)
 a[1].pull()
+
+h1 = Handle(numpy.random.normal, loc = 10, scale = 3)
+h2 = Handle(numpy.random.normal, loc = 6, scale = 2)
+h3 = Handle(numpy.random.normal, loc = -2, scale = 5)
+h4 = Handle(numpy.random.normal, loc = 1, scale = 1)
+h5 = Handle(numpy.random.exponential, scale = 4)
+
+hand = [h1, h2, h3, h4, h5]
+
+s = Sys(hand)
+barry = Agent(epsGreedy, 0.1, 5)
+run(s, barry)
+barry.rewardList
+barry.tries
