@@ -39,6 +39,5 @@ def epsGreedy(rewardList, epsilon):
         m = max(rewardList)
         return random.choice([i for i,j in enumerate(rewardList) if j == m])
     else:
-        m = max(rewardList)
-        return random.choice([i for i,j in enumerate(rewardList) if j != m])
+        return random.choice(range(len(rewardList)))
 
